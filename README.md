@@ -38,3 +38,40 @@
    };
    ```
 
+
+---
+
+
+# Docker 镜像加速
+
+自用 Docker Hub 镜像加速: https://appscross.com
+
+为了加速镜像拉取，使用以下命令设置 registry mirror:
+
+```bash
+# sudo if needed 
+
+mkdir -p /etc/docker
+
+tee /etc/docker/daemon.json <<EOF
+{
+    "registry-mirrors": ["https://docker.pawpaw2022.com"]
+}
+EOF
+
+systemctl daemon-reload
+
+systemctl restart docker
+```
+
+不用设置环境也可以直接使用，用法示例：
+
+
+```bash
+docker pull docker.pawpaw2022.com/library/mysql:8.0
+```
+
+说明：library 是一个特殊的命名空间，它代表的是官方镜像。
+
+
+自建镜像，请勿滥用。
